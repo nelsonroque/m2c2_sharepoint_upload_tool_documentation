@@ -55,14 +55,13 @@ filename             Required. Local filename to upload, including path
    1. https://[TENANT].sharepoint.com/sites/[SITE_NAME]/_layouts/15/appinv.aspx
    2. Add XML below for appropriate write permissions. May require Tenant administrator approval.
 
-   ```
+```
    <AppPermissionRequests AllowAppOnlyPolicy="true"> 
    <AppPermissionRequest Scope="http://sharepoint/content/sitecollection"
     Right="Write" />
 </AppPermissionRequests>
 
-   ```
-
+```
 
 ### Configure CRON Job
 
