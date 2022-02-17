@@ -51,9 +51,15 @@ filename             Required. Local filename to upload, including path
 
 1. Create an app inside of the Sharepoint site
    1. https://[TENANT].sharepoint.com/sites/[SITE_NAME]/_layouts/15/AppRegNew.aspx 
+   2. Details:
+      1. Title: M2C2 Auto-Uploader
+      2. App Domain: www.m2c2.io
+      3. Redirect URI: https://www.m2c2.io
 2. Approve the app
    1. https://[TENANT].sharepoint.com/sites/[SITE_NAME]/_layouts/15/appinv.aspx
    2. Add XML below for appropriate write permissions. May require Tenant administrator approval.
+3. Create Document Library on Sharepoint (or reuse existing Document Library)
+   1. https://support.microsoft.com/en-us/office/create-a-document-library-in-sharepoint-306728fe-0325-4b28-b60d-f902e1d75939 
 
 ```
    <AppPermissionRequests AllowAppOnlyPolicy="true"> 
@@ -81,7 +87,7 @@ sudo zip -r "/tmp/[ZIP_PREFIX]_$Datetime.zip" ./eas_followups
 
 # send to sharepoint
 echo "sending to sharepoint"
-sudo /usr/local/sbin/sharepoint-upload -u 'https://[TENANT].sharepoint.com/sites/[SITE_NAME]/' -a '[APP_ID]' -s '[APP_SECRET]' -f 'Scripted Uploads' "/tmp/[ZIP_PREFIX]_$Datetime.zip"
+sudo /usr/local/sbin/sharepoint-upload -u 'https://[TENANT].sharepoint.com/sites/[SITE_NAME]/' -a '[APP_ID]' -s '[APP_SECRET]' -f '[INSERT DOCUMENT LIBRARY NAME]' "/tmp/[ZIP_PREFIX]_$Datetime.zip"
 if [ $? -ne 0 ]
 then
     mail -s "Backup of data failed" '[EMAILS TO NOTIFY ON ERROR - comma seperated]' <<< " "
